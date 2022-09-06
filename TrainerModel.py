@@ -2,6 +2,7 @@ import cv2
 import pickle
 import os.path
 import numpy as np
+import pytest
 from imutils import paths
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
@@ -71,3 +72,10 @@ model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accur
 model.fit(xTrain, yTrain, validation_data=(xTest, yTest), batch_size=27, epochs=10, verbose=1)
 
 model.save(MODEL)
+
+def test_files():
+    flag = False
+    for root, dir, files in os.walk("C:"):
+        if MODEL in files:
+            flag = True
+    assert flag == True
