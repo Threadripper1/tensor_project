@@ -6,7 +6,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'pwd'
-                sh 'pytest'
+                sh 'pytest -q TrainerModel.py'
             }
         }
     }
