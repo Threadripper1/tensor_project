@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                sh 'echo "I love Ukraine" '
                 sh 'pwd'
                 sh 'pytest -q TrainerModel.py'
             }
