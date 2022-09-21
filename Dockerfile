@@ -8,9 +8,9 @@ RUN apt update && apt install -y libsm6 libxext6 libxrender-dev
 
 RUN apt install python3 -y
 
-RUN apt install pip -y
+RUN apt install python3-pip -y
 
-RUN pip install pytest
+RUN pip3 install pytest -y
 
 RUN apt install make -y
 
