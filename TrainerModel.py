@@ -75,7 +75,7 @@ model.save(MODEL)
 
 def test_files():
     flag = False
-    for root, dir, files in os.walk("C:"):
+    for root, dir, files in os.walk(".", topdown=False, onerror=None, followlinks=True):
         if MODEL in files:
             flag = True
     assert flag == True
