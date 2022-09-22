@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh 'echo "I love Ukrainewe"'
                 sh 'pwd'
-                sh 'pytest -q TrainerModel.py'
+                sh 'pytest -q tests.py'
             }
         }
     }
