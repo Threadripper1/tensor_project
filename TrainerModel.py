@@ -2,7 +2,6 @@ import cv2
 import pickle
 import os.path
 import numpy as np
-import pytest
 from imutils import paths
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
@@ -34,7 +33,6 @@ for image_file in images:
 data = np.array(data, dtype="float") / 255.0
 labels = np.array(labels)
 
-#
 (xTrain, xTest, yTrain, yTest) = train_test_split(data, labels, test_size=0.25, random_state=0)
 
 # save the labels to use for prediction. (using one-hot encoding)
@@ -72,10 +70,3 @@ model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accur
 model.fit(xTrain, yTrain, validation_data=(xTest, yTest), batch_size=27, epochs=10, verbose=1)
 
 model.save(MODEL)
-
-def test_files():
-    flag = False
-    for root, dir, files in os.walk(".", topdown=False, onerror=None, followlinks=True):
-        if MODEL in files:
-            flag = True
-    assert flag == True

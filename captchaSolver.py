@@ -60,3 +60,4 @@ def getCaptcha(url):
 		return {'success': True, 'captcha': captcha}
 	except:
 		return {'success': False, 'msg': 'The URL is invalid or expired'}
+
