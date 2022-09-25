@@ -17,9 +17,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'echo "I love Ukrainewe"'
-                sh 'pwd'
-                sh 'pytest -q tests.py'
+                sh """
+                    echo "Testing...."
+                    pytest -q tests.py
+                """
             }
         }
     }
