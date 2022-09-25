@@ -13,10 +13,10 @@ pipeline {
         }
     }
     post {
-        failure('Tests Failed'){
+        failure {
             echo "Tests Failed"
         }
-        success('Tests Successed') {
+        success {
             echo "Tests Successed"
         }
     }
