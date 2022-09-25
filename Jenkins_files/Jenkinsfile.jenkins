@@ -12,4 +12,12 @@ pipeline {
             }
         }
     }
+    post {
+        failure('Tests Failed'){
+            echo "Tests Failed"
+        }
+        success('Tests Successed') {
+            echo "Tests Successed"
+        }
+    }
 }
