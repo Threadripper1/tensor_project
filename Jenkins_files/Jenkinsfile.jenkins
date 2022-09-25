@@ -3,18 +3,6 @@ pipeline {
         dockerfile true
     }
     stages {
-        stage('Checkout SCM'){
-            steps{
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: 'master']],
-                    userRemoteConfigs: [[
-                        url: 'git@github.com:Threadripper1/tensor_project.git',
-                        credentialsId: '',
-                    ]]
-                ])
-            }
-        }
         stage('Test') {
             steps {
                 sh """
