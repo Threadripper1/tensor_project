@@ -6,8 +6,9 @@ pipeline {
     environment {
         registry = "343091671287.dkr.ecr.us-east-2.amazonaws.com/tensor-docker"
     }
-    
+
     stages {
+    // Testing stage
         stage('Test') {
             steps {
                 script {
