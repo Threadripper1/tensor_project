@@ -2,22 +2,43 @@ pipeline {
     agent {
         dockerfile true
     }
+
+    enviroment {
+        registry = "343091671287.dkr.ecr.us-east-2.amazonaws.com/tensor-docker"
+    }
+    
     stages {
         stage('Test') {
             steps {
-                sh """
-                    echo "Testing...."
-                    pytest -q tests.py
-                """
+                script {
+                    try {
+                        sh """
+                            echo "Testing...."
+                            pytest -q tests.py
+                        """
+                    } catch (Exception err) {
+                        currentBuild.result = 'FAILED'
+                    }
+                }
             }
         }
-    }
-    post {
-        failure {
-            echo "Tests Failed"
+        stage ("build image") 
+        {
+            steps {
+                script {
+                    dockerImage = docker.build registry
+                    }
+                }
         }
-        success {
-            echo "Tests Successed"
+        stage ("upload to ECR") {
+            steps {
+                script {
+                    sh """
+                    aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 343091671287.dkr.ecr.us-east-2.amazonaws.com
+                    docker push 343091671287.dkr.ecr.us-east-2.amazonaws.com/tensor-docker:latest
+                    """
+                }
+            }
         }
     }
 }
