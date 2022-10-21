@@ -41,5 +41,12 @@ pipeline {
                 }
             }
         }
+        stage("deploy to K8s") {
+            steps {
+                withKubeConfig(caCertificate:'', clusterName:'', contextName:'', credentialsId:'K8s', namespace:'', serverUrl:'') {
+                    sh 'kubectl apply -f eks-deploy-from-ecr.yml'
+                }
+            }
+        }
     }
 }
