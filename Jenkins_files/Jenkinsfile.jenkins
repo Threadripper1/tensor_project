@@ -1,11 +1,14 @@
 pipeline {
-    agent {
-        dockerfile true
+    environment {
+        registry = "343091671287.dkr.ecr.us-east-2.amazonaws.com/tensor-docker"
     }
 
     stages {
     // Testing stage
         stage('Test') {
+            agent {
+                dockerfile true
+            }
             steps {
                 script {
                     try {
@@ -19,19 +22,13 @@ pipeline {
                 }
             }
         }
-    }
-}
-pipeline {
-    environment {
-        registry = "343091671287.dkr.ecr.us-east-2.amazonaws.com/tensor-docker"
-    }
-    stages {
-        stage ("build image") {
+        stage ("build image") 
+        {
             steps {
                 script {
                     dockerImage = docker.build registry
+                    }
                 }
-            }
         }
         stage ("upload to ECR") {
             steps {
