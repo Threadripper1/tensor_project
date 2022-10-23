@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment {
         registry = "343091671287.dkr.ecr.us-east-2.amazonaws.com/tensor-docker"
     }
